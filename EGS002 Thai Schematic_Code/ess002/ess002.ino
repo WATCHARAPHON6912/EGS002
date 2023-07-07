@@ -1,5 +1,4 @@
-// Single phase PWM Sine Wave Generator // ดัดแปลงเพิ่มเติม จากต้นฉับ DDS generator ของ KHM 2009 /  Martin Nawrath
-// Modified 20-01-2020 By Seree2004 (เสรี เงินประภัศร)
+
 #include <LiquidCrystal.h>
 //เรียกโปรแกรมคำสั่งการใช้งานจอแสดงผล LCD เข้ามาร่วมด้วย
 PROGMEM const unsigned char Sine_Table[10]  = {"seree2004"};

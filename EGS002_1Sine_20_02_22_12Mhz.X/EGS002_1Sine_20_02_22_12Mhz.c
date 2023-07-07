@@ -1,9 +1,3 @@
-/*
- * File: Use WinAVR Compiler
- * Author: seree2004,HS1YWN
- *
- * Created on 14-02-2022 
- */
 #define F_CPU 12000000UL
 
 #include <stdlib.h>
@@ -14,24 +8,24 @@
 
 //==============================================================================
 const unsigned char character1[64] = {
-0,18,18,18,18,18,27,0,  		 //      0     ·
-0,14,17,29,21,21,25,0,  		 //      1     ¥
-0,0,4,4,4,4,6,0,       			 //      2     ‡
-0,2,31,1,29,19,25,0,             //      3      
-1,15,6,9,14,1,6,0,     			 //      4     √’
-24,24,7,8,8,8,7,0,     			 //      5     Õß»“C
+0,18,18,18,18,18,27,0,  		 //      0     √°
+0,14,17,29,21,21,25,0,  		 //      1     ¬¥
+0,0,4,4,4,4,6,0,       			 //      2     √†
+0,2,31,1,29,19,25,0,             //      3     √ä
+1,15,6,9,14,1,6,0,     			 //      4     √É√ï
+24,24,7,8,8,8,7,0,     			 //      5     √ç¬ß√à√íC
 0,0,20,23,29,22,23,0,            //      6     Hz
-0,0,9,21,18,0,0,0}; 			 //      7     √Ÿª´“¬‡«ø   
+0,0,9,21,18,0,0,0}; 			 //      7     √É√ô¬ª¬´√í√Ç√†√á¬ø   
 //==============================================================================
 const unsigned char character2[64] = {
-0,0,25,9,21,21,10,0,             // 	  0	æ   
-26,12,7,8,15,1,14,0,  			 //      1     √È
-0,0,14,1,13,9,14,0,  			 //      2     Õ
-0,0,25,9,9,25,30,0,       		 //      3     ¡
-1,15,6,9,14,1,6,0,     			 //      4     √’
-24,24,7,8,8,8,7,0,     			 //      5     Õß»“C
+0,0,25,9,21,21,10,0,             // 	  0	¬æ   
+26,12,7,8,15,1,14,0,  			 //      1     √É√©
+0,0,14,1,13,9,14,0,  			 //      2     √ç
+0,0,25,9,9,25,30,0,       		 //      3     √Å
+1,15,6,9,14,1,6,0,     			 //      4     √É√ï
+24,24,7,8,8,8,7,0,     			 //      5     √ç¬ß√à√íC
 0,0,20,23,29,22,23,0,            //      6     Hz
-0,0,9,21,18,0,0,0};  			 //      7     √Ÿª´“¬‡«ø   
+0,0,9,21,18,0,0,0};  			 //      7     √É√ô¬ª¬´√í√Ç√†√á¬ø   
 //==============================================================================
 // LCD interface (should agree with the diagram above)
 //   make sure that the LCD RW pin is connected to GND
@@ -206,13 +200,13 @@ int main(void) {
       while(c4ms);
     }
     if (read_adc(VLAVEL)<= 32)  Lost_AC();     //IF AC Output < 194V Error
-    lcd_xy_char(1, 1, 0);        //æ
-    lcd_xy_char(1, 2, 1);     	 //√È
-    lcd_xy_char(1, 3, 2);  	 //Õ
-    lcd_xy_char(1, 4, 3);       //¡
+    lcd_xy_char(1, 1, 0);        //¬æ
+    lcd_xy_char(1, 2, 1);     	 //√É√©
+    lcd_xy_char(1, 3, 2);  	 //√ç
+    lcd_xy_char(1, 4, 3);       //√Å
     lcd_write_str(" 50");
     lcd_write_char(6);
-    sbi(PORTB,5);  //************** ON AC OUTPUT Relay ‡¡◊ËÕæ√ÈÕ¡·≈È« 
+    sbi(PORTB,5);  //************** ON AC OUTPUT Relay √†√Å√ó√®√ç¬æ√É√©√ç√Å√°√Ö√©√á 
 //==============================================================================
     while(1){ 
        uint8_t i;
@@ -240,8 +234,8 @@ int main(void) {
       tlavel = (uint8_t) steinhart;
  //============================================================================== 
       V_Read = read_adc(VLAVEL);
-      Volts_Show = V_Read >> 3;      // ‡Õ“·§Ë‰¡Ë‡°‘π 127
-      N_Volts_Show = COMPENSATE - Volts_Show;       //‡æ◊ËÕ™¥‡™¬°“√§«∫§ÿ¡‚«≈µÏ‰ø AC ¢“ÕÕ° AC Adj.
+      Volts_Show = V_Read >> 3;      // √†√ç√í√°¬§√®√§√Å√®√†¬°√î¬π 127
+      N_Volts_Show = COMPENSATE - Volts_Show;       //√†¬æ√ó√®√ç¬™¬¥√†¬™√Ç¬°√í√É¬§√á¬∫¬§√ò√Å√¢√á√Ö¬µ√¨√§¬ø AC ¬¢√í√ç√ç¬° AC Adj.
 	  if (N_Volts_Show >= MAX_AMPLITUDE) N_Volts_Show = MAX_AMPLITUDE;
 	  if (N_Volts_Show <= MIN_AMPLITUDE) N_Volts_Show = MIN_AMPLITUDE;
       if (Volts_Show != Old_Volts){
@@ -275,16 +269,16 @@ ISR(TIMER2_OVF_vect) {
 
     switch (DUTY_CYCLE){
     case 0:
-      cbi(PORTB,1);   //digitalWrite(Sink1, LOW); // ’‡¢’¬« „π ‚§ª
+      cbi(PORTB,1);   //digitalWrite(Sink1, LOW); //√ä√ï√†¬¢√ï√Ç√á √£¬π√ä√¢¬§¬ª
     break;
     case 1:  
-      sbi (PORTB,2);  //digitalWrite(Sink2, HIGH);  // ’·¥ß „π ‚§ª
+      sbi (PORTB,2);  //digitalWrite(Sink2, HIGH);  //√ä√ï√°¬¥¬ß √£¬π√ä√¢¬§¬ª
     break;
     case 65:
-      cbi (PORTB,2);  //digitalWrite(Sink2, LOW); // ’·¥ß „π ‚§ª
+      cbi (PORTB,2);  //digitalWrite(Sink2, LOW); //√ä√ï√°¬¥¬ß √£¬π√ä√¢¬§¬ª
     break;
     case 66:  
-      sbi (PORTB,1);  //digitalWrite(Sink1, HIGH);  // ’‡¢’¬« „π ‚§ª
+      sbi (PORTB,1);  //digitalWrite(Sink1, HIGH);  //√ä√ï√†¬¢√ï√Ç√á √£¬π√ä√¢¬§¬ª
     break;
    }
   
